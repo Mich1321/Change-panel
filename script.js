@@ -1,9 +1,13 @@
 const backGround = document.querySelector(".container");
 const bodyBgc = document.querySelector("body");
+const tools = document.querySelector(".tools");
 const btnColor = document.querySelector(".btn-bgc");
 const btnImage = document.querySelector(".btn-bgi");
 const btnReset = document.querySelector(".btn-reset");
+const dogsBtn = document.querySelector(".dogs");
+const img = document.querySelector("img");
 
+const URL = "https://dog.ceo/api/breeds/image/random";
 const changeBgc = () => {
 	let randomColor = Math.floor(Math.random() * 16777215).toString(16);
 	backGround.style.backgroundColor = "#" + randomColor;
@@ -29,7 +33,15 @@ const changeBody = () => {
 const reset = () => {
 	backGround.style.backgroundColor = "gray";
 	bodyBgc.style.backgroundImage = "none";
+	img.style.display = "none";
 };
+
+dogsBtn.addEventListener("click", () => {
+	fetch(URL)
+		.then((res) => res.json())
+		.then((data) => img.setAttribute("src", data.message))
+		.catch((err) => console.error(err));
+});
 
 btnColor.addEventListener("click", changeBgc);
 btnImage.addEventListener("click", changeBody);

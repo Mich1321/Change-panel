@@ -30,19 +30,17 @@ const changeBody = () => {
 	bodyBgc.style.backgroundImage = bigSize[random];
 };
 
-const reset = () => {
-	backGround.style.backgroundColor = "gray";
-	bodyBgc.style.backgroundImage = "none";
-	img.style.display = "none";
-};
-
 dogsBtn.addEventListener("click", () => {
 	fetch(URL)
 		.then((res) => res.json())
 		.then((data) => img.setAttribute("src", data.message))
 		.catch((err) => console.error(err));
 });
-
+const reset = () => {
+	backGround.style.backgroundColor = "gray";
+	bodyBgc.style.backgroundImage = "none";
+	img.setAttribute("src", "");
+};
 btnColor.addEventListener("click", changeBgc);
 btnImage.addEventListener("click", changeBody);
 btnReset.addEventListener("click", reset);
